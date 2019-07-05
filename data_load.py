@@ -12,7 +12,7 @@ def load_csv(csv_file,normalize=False):
 			dataset.iloc[i,1:]=(dataset.iloc[i,1:]-100)/50
 	return dataset
 
-def create_generator(img_folder, data_frame,img_size,batch_size):
+def create_generator(img_folder, data_frame,batch_size):
 	data_generator=ImageDataGenerator (rescale = 1./255)
 	generator=data_generator.flow_from_dataframe(dataframe = data_frame,
 												directory = img_folder,
@@ -20,6 +20,6 @@ def create_generator(img_folder, data_frame,img_size,batch_size):
 												y_col =[str(i) for i in range(136)],
 												color_mode ='grayscale',
 												class_mode ='other',
-												target_size = img_size,
+												target_size = (224,224),
 												batch_size = batch_size)
 	return generator
